@@ -5,7 +5,7 @@ import {
   Web3Button,
 } from '@thirdweb-dev/react';
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -26,6 +26,10 @@ const Home: NextPage = () => {
     const counter = await contract.call('getCounter');
     setCounter(counter.toString());
   }
+
+  useEffect(() => {
+    getCounter();
+  });
 
   return (
     <div className={styles.container}>
