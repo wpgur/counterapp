@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   //내 주소 불러오기
   const myAddress = useAddress();
   //contract 연결
-  const contractAddress = '0x3eAA24cf8927A9875751b96dbF729C44d9208da6';
+  const contractAddress = '0x8220C67737B9885bE0A18Da6cff4C599D967eF80';
   const { contract, isLoading } = useContract(contractAddress);
 
   //react hook이라는 기술
@@ -33,24 +33,52 @@ const Home: NextPage = () => {
         <div className={styles.connect}>
           <ConnectWallet />
         </div>
+        <div className={styles.title}>
+          <h3>우제혁의 카운터 앱</h3>
+        </div>
+
+        <div className={styles.description}>
+          contract address: {contractAddress} <br />
+          Host address: 0x7259EdfECeA1F69C388c9fb25daC8073911b1cA7 <br />
+          Your adress: {myAddress}
+        </div>
+
+        <div className={styles.title}></div>
+
         <p>My Address : {myAddress} </p>
         <h1>Counter Dapp</h1>
         <h3>{counter}</h3>
 
-        <Web3Button
-          contractAddress={contractAddress}
-          action={() => getCounter()}
-        >
-          Refresh Counter
-        </Web3Button>
-        <br />
+        <div className={styles.grid}>
+          <div className={styles.card}>
+            <Web3Button
+              contractAddress={contractAddress}
+              action={() => contract?.call('decrementCounter')}
+            >
+              <h1>-</h1>
+            </Web3Button>
+          </div>
 
-        <Web3Button
-          contractAddress={contractAddress}
-          action={() => contract?.call('incrementCounter')}
-        >
-          +
-        </Web3Button>
+          <div className={styles.card}>
+            <Web3Button
+              contractAddress={contractAddress}
+              action={() => getCounter()}
+            >
+              <h1>Refresh Counter</h1>
+            </Web3Button>
+          </div>
+
+          <br />
+
+          <div className={styles.card}>
+            <Web3Button
+              contractAddress={contractAddress}
+              action={() => contract?.call('incrementCounter')}
+            >
+              <h1>+</h1>
+            </Web3Button>
+          </div>
+        </div>
       </main>
     </div>
   );
