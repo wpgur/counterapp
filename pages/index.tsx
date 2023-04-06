@@ -43,7 +43,7 @@ const Home: NextPage = () => {
           Your adress: {myAddress}
         </div>
 
-        <div className={styles.title}></div>
+        <div className={styles.title}>contract</div>
 
         <p>My Address : {myAddress} </p>
         <h1>Counter Dapp</h1>
